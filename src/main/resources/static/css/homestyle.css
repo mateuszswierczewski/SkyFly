@@ -1,0 +1,23 @@
+body{
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 28px;
+    font-family: 'Comfortaa', cursive;
+}
+
+#menu{
+    background: aquamarine;
+    border-bottom: black 1px;
+    width: 100%;
+    max-height: 100px;
+}
+
+#logo{
+    float: left;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#sky{
+    color: #196EF7;
+}
