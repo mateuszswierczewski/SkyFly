@@ -28,7 +28,7 @@ public abstract class Person implements Serializable {
     @Column(nullable = false)
     private LocalDate birthDate;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "contact_details", nullable = false)
     private ContactDetails contactDetails;
 

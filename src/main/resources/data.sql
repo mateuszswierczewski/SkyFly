@@ -1,0 +1,1 @@
+insert into roles(role) VALUES ("ROLE_PASSENGER");

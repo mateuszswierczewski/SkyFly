@@ -1,4 +1,4 @@
-package pl.mswierczewski.skyfly.controllers;
+package pl.mswierczewski.skyfly.controllers.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
