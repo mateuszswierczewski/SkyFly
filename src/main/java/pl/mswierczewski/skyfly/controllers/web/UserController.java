@@ -3,38 +3,37 @@ package pl.mswierczewski.skyfly.controllers.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.mswierczewski.skyfly.models.User;
-import pl.mswierczewski.skyfly.services.UserService;
-
-import javax.validation.Valid;
+import pl.mswierczewski.skyfly.security.user.SkyFlyUser;
+import pl.mswierczewski.skyfly.security.user.SkyFlyUserService;
 
 @Controller
 public class UserController {
 
-    private UserService userService;
+    private SkyFlyUserService userService;
 
     @Autowired
-    public void setUserService(UserService userService){
+    public UserController(SkyFlyUserService userService){
         this.userService = userService;
     }
 
     @GetMapping("/register")
-    public String register(Model model) {
-        model.addAttribute("user", new User());
+    public String getRegisterPage(Model model){
+        model.addAttribute("user", new SkyFlyUser());
         return "registerForm";
     }
 
     @PostMapping("/register")
-    public String addUser(@ModelAttribute @Valid User user, BindingResult bindResult) {
-        if(bindResult.hasErrors())
-            return "registerForm";
-        else {
-            userService.addWithDefaultRole(user);
-            return "registerSuccess";
-        }
+    public String registerUserAsPassenger(@ModelAttribute SkyFlyUser user){
+        userService.registerUserAsPassenger(user);
+        return "registerSuccess";
     }
+
+    @GetMapping("/login")
+    public String getLoginPage(){
+        return "/user_management_templates/loginForm";
+    }
+
 }

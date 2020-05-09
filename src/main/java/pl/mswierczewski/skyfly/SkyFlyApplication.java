@@ -3,11 +3,6 @@ package pl.mswierczewski.skyfly;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import pl.mswierczewski.skyfly.models.ContactDetails;
-import pl.mswierczewski.skyfly.models.Passenger;
-import pl.mswierczewski.skyfly.repositories.PassengerRepository;
-
-import java.time.LocalDate;
 
 @SpringBootApplication
 public class SkyFlyApplication {
