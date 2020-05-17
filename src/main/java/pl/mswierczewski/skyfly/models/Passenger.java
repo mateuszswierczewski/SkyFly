@@ -11,14 +11,16 @@ public class Passenger extends Person implements Serializable {
 
     public Passenger(){ super(); }
 
-    public Passenger(String firstName, String secondName, String lastName, String identityCardNumber, LocalDate birthDate){
-        super(firstName, secondName, lastName, identityCardNumber, birthDate);
+    public Passenger(String firstName, String secondName, String lastName, /*String identityCardNumber,*/ LocalDate birthDate){
+        super(firstName, secondName, lastName, /*identityCardNumber,*/ birthDate);
     }
 
-    public Passenger(String firstName, String lastName, String identityCardNumber, LocalDate birthDate){
-        super(firstName, lastName, identityCardNumber, birthDate);
+    public Passenger(String firstName, String lastName,/* String identityCardNumber,*/ LocalDate birthDate){
+        super(firstName, lastName, /*identityCardNumber,*/ birthDate);
     }
 
-
-
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

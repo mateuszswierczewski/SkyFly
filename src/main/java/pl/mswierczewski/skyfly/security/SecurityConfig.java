@@ -6,11 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.mswierczewski.skyfly.security.user.SkyFlyUserService;
+import pl.mswierczewski.skyfly.security.user.DefaultSkyFlyUserService;
 
 
 @Configuration
@@ -18,10 +17,10 @@ import pl.mswierczewski.skyfly.security.user.SkyFlyUserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final SkyFlyUserService userService;
+    private final DefaultSkyFlyUserService userService;
 
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, SkyFlyUserService userService){
+    public SecurityConfig(PasswordEncoder passwordEncoder, DefaultSkyFlyUserService userService){
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
     }
@@ -30,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/register").permitAll()
+                    .antMatchers("/", "/register", "/css/**", "/images/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/", false)
+                    .defaultSuccessUrl("/", true)
                     .passwordParameter("password")
                     .usernameParameter("username")
                 .and()

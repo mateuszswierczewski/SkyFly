@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{registerForm.title}">Title</title>
+    <link th:href="@{/css/userstyle.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}" rel="stylesheet">
+</head>
+<body>
+    <div id="userForm">
+        <form action="#" method="post" th:action="@{/register}">
+            <h2 th:text="#{registerForm.header}">Registration to SkyFly</h2>
+
+            <div>
+                <!-- <p th:text="#{form.username}">Username<span class="red-dot">*</span></p> -->
+                <p th:errors="${user.username}">Username error</p>
+                <input id="username" type="text" th:field="${user.username}" th:placeholder="#{form.username}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.password}">Password<span class="red-dot">*</span></p>-->
+                <p th:errors="${user.password}">Password error</p>
+                <input id="password" type="password" th:field="${user.password}" th:placeholder="#{form.password}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.firstName}">First name<span class="red-dot">*</span></p>-->
+                <p th:errors="${passenger.firstName}">First name error</p>
+                <input id="firstName" type="text" th:field="${passenger.firstName}" th:placeholder="#{form.firstName}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.secondName}">Second name</p>-->
+                <p th:errors="${passenger.secondName}">Second name error</p>
+                <input id="secondName" type="text" th:field="${passenger.secondName}" th:placeholder="#{form.secondName}"/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.lastName}">Last name<span class="red-dot">*</span></p>-->
+                <p th:errors="${passenger.lastName}">Last name error</p>
+                <input id="lastName" type="text" th:field="${passenger.lastName}" th:placeholder="#{form.lastName}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.birthDate}">BirthDate<span class="red-dot">*</span></p>-->
+                <p th:errors="${passenger.birthDate}">BirthDate error</p>
+                <input id="birthDate" type="date" th:field="${passenger.birthDate}" th:placeholder="#{form.birthDate}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.email}">Email<span class="red-dot">*</span></p>-->
+                <p th:errors="${contact.email}">Email error</p>
+                <input id="email" type="text" th:field="${contact.email}" th:placeholder="#{form.email}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.phoneNumber}">phoneNumber<span class="red-dot">*</span></p>-->
+                <p th:errors="${contact.phoneNumber}">Address error</p>
+                <input id="phoneNumber" type="number" th:field="${contact.phoneNumber}" th:placeholder="#{form.phoneNumber}" required=""/>
+            </div>
+
+            <div>
+                <!-- <p th:text="#{form.address}">Address<span class="red-dot">*</span></p> -->
+                <p th:errors="${contact.address}">Address error</p>
+                <input id="address" type="text" th:field="${contact.address}" th:placeholder="#{form.address}" required=""/>
+            </div>
+
+            <div>
+                <button class="form-button" type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+    <div id="content">
+
+    </div>
+</body>
+</html>

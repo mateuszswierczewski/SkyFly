@@ -10,4 +10,6 @@ public interface SkyFlyUserRepository extends JpaRepository<SkyFlyUser, String> 
 
     Optional<SkyFlyUser> findByUsername(String username);
 
+    boolean existsByUsername(String username);
+
 }
