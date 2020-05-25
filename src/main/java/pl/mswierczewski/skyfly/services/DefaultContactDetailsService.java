@@ -1,8 +1,11 @@
 package pl.mswierczewski.skyfly.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import pl.mswierczewski.skyfly.models.Airport;
 import pl.mswierczewski.skyfly.repositories.ContactDetailsRepository;
 
+@Service
 public class DefaultContactDetailsService implements ContactDetailsService {
 
     private ContactDetailsRepository contactDetailsRepository;

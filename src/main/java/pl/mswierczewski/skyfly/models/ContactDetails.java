@@ -2,7 +2,6 @@ package pl.mswierczewski.skyfly.models;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.springframework.format.annotation.NumberFormat;
 import pl.mswierczewski.skyfly.services.ContactDetailsService;
 import pl.mswierczewski.skyfly.validation.constraints.Unique;
 
@@ -18,15 +17,15 @@ public class ContactDetails implements Serializable {
     @Column(name = "id_contact")
     private Integer id;
 
-    @NotNull
+    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.address.NotNull.message}")
     private String address;
 
-    @NotNull
+    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.phoneNumber.NotNull.message}")
     private Integer phoneNumber;
 
-    @NotNull
+    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.NotNull.message}")
     @Email(message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.Email.message}")
-    @Unique(service = ContactDetailsService.class, columnName = "email",
+    @Unique(serviceClass = ContactDetailsService.class, columnName = "email",
             message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.Unique.message}")
     private String email;
 

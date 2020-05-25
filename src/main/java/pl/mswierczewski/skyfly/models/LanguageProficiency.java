@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "Language_Proficiency")
+@Table(name = "language_proficiency")
 public class LanguageProficiency implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

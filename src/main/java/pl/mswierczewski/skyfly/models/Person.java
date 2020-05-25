@@ -16,42 +16,38 @@ public abstract class Person implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_person")
-    private Long id;
+    protected Long id;
 
     @NotNull
     @Size(min = 2, message = "{pl.mswierczewski.skyfly.models.Person.firstName.Size.message}")
-    private String firstName;
+    protected String firstName;
 
-    private String secondName; //optional
+    protected String secondName; //optional
 
     @NotNull
     @Size(min = 2, message = "{pl.mswierczewski.skyfly.models.Person.lastName.Size.message}")
-    private String lastName;
-
-//    @Column(nullable = false, unique = true)
-//    private String identityCardNumber;
+    protected String lastName;
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     @Past(message = "{pl.mswierczewski.skyfly.models.Person.birthDate.Past.message}")
-    private LocalDate birthDate;
+    protected LocalDate birthDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "contact_details")
-    private ContactDetails contactDetails;
+    protected ContactDetails contactDetails;
 
     public Person(){ }
 
-    public Person(String firstName, String secondName, String lastName, /*String identityCardNumber,*/ LocalDate birthDate){
+    public Person(String firstName, String secondName, String lastName, LocalDate birthDate){
         this.firstName = firstName;
         this.secondName = secondName;
         this.lastName = lastName;
-       // this.identityCardNumber = identityCardNumber;
         this.birthDate = birthDate;
     }
 
-    public Person(String firstName, String lastName, /*String identityCardNumber,*/ LocalDate birthDate){
-        this(firstName, null, lastName, /*identityCardNumber,*/ birthDate);
+    public Person(String firstName, String lastName, LocalDate birthDate){
+        this(firstName, null, lastName, birthDate);
     }
 
     public Long getId() {
@@ -94,14 +90,6 @@ public abstract class Person implements Serializable {
         this.birthDate = birthDate;
     }
 
-//    public String getIdentityCardNumber() {
-//        return identityCardNumber;
-//    }
-//
-//    public void setIdentityCardNumber(String identityCardNumber) {
-//        this.identityCardNumber = identityCardNumber;
-//    }
-
     public ContactDetails getContactDetails() {
         return contactDetails;
     }
@@ -118,7 +106,6 @@ public abstract class Person implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                //", identityCardNumber='" + identityCardNumber + '\'' +
                 ", birthDate=" + birthDate +
                 ", contactDetails=" + contactDetails +
                 '}';

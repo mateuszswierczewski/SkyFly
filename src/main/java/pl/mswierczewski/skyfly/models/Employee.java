@@ -15,7 +15,4 @@ public abstract class Employee extends Person implements Serializable {
     @Column(nullable = false)
     private Double basicSalary;
 
-    @Column(nullable = false, unique = true)
-    private String pilotLicenseNumber;
-
 }

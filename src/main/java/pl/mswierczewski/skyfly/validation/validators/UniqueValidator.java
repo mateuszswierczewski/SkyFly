@@ -18,7 +18,7 @@ public class UniqueValidator implements ConstraintValidator<Unique, Object> {
 
     @Override
     public void initialize(Unique constraintAnnotation) {
-        this.service = context.getBean(constraintAnnotation.service());
+        this.service = context.getBean(constraintAnnotation.serviceClass());
         this.columnName = constraintAnnotation.columnName();
     }
 

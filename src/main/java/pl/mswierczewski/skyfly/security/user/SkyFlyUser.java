@@ -23,7 +23,7 @@ public class SkyFlyUser implements UserDetails, Serializable {
     @Id
     @NotNull(message = "{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.NotNull.message}")
     @Size(min = 4, message ="{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.Size.message}")
-    @Unique(service = SkyFlyUserService.class, columnName = "username",
+    @Unique(serviceClass = SkyFlyUserService.class, columnName = "username",
             message = "{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.Unique.message}")
     private String username;
 

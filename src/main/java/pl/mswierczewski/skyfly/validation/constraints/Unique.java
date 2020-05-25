@@ -22,6 +22,6 @@ public @interface Unique {
     String message() default "{pl.mswierczewski.skyfly.validation.constraints.Unique.message}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
-    Class<? extends ValueExists> service();
+    Class<? extends ValueExists> serviceClass();
     String columnName();
 }

@@ -35,9 +35,9 @@ public class UserController {
 
     @PostMapping("/register")
     public String registerUserAsPassenger(@Valid @ModelAttribute(value = "user") SkyFlyUser user, BindingResult userBindingResult,
-                                          @ModelAttribute(value = "passenger") Passenger passenger,
-                                          @ModelAttribute(value = "contact") ContactDetails contactDetails){
-        if(userBindingResult.hasErrors()){
+                                          @Valid @ModelAttribute(value = "passenger") Passenger passenger, BindingResult passengerBindingResult,
+                                          @Valid @ModelAttribute(value = "contact") ContactDetails contactDetails, BindingResult contactBindingResult){
+        if(userBindingResult.hasErrors() || passengerBindingResult.hasErrors() || contactBindingResult.hasErrors()){
             return "/user_management_templates/registerForm";
         }
 
