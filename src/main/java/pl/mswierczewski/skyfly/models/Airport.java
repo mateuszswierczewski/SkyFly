@@ -78,4 +78,11 @@ public class Airport implements Serializable {
         this.country = country;
     }
 
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 }

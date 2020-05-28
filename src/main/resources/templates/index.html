@@ -15,15 +15,63 @@
         <div id="buttonsDiv">
             <a id="registerButton" class="userButtons" th:href="@{/register}">Sign up</a>
             <a id="loginButton" class="userButtons" th:href="@{/login}">Log in</a>
-            <a href="#">cos1</a>
-            <a href="#">dupa123</a>
-            <a href="#">o lol</a>
+            <a href="#">tmp1</a>
+            <a href="#">tmp2</a>
+            <a href="#">tmp3</a>
         </div>
     </div>
     <div id="content">
         <div id="searchFligth">
             <form method="post" th:action="@{/searchFlights}">
-
+                <h2>Search flights</h2>
+                <div>
+                    <label>From</label>
+                    <label th:errors="${flightRequest.departureCity}">Error</label>
+                    <select th:field="${flightRequest.departureCity}">
+                        <option hidden value=" "> Departure city </option>
+                        <optgroup th:each="cities : ${allCitiesWithCountry}"  th:label="${cities.key}">
+                            <option th:each="city : ${cities.value}" th:value="${city}" th:text="${city}"></option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <p>To</p>
+                    <p th:errors="${flightRequest.arrivalCity}">Error</p>
+                    <select th:field="${flightRequest.arrivalCity}">
+                        <option hidden value=" "> Departure city </option>
+                        <optgroup th:each="cities : ${allCitiesWithCountry}"  th:label="${cities.key}">
+                            <option th:each="city : ${cities.value}" th:value="${city}" th:text="${city}"></option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div>
+                    <p>Departure Date</p>
+                    <p th:errors="${flightRequest.departureDate}">Error</p>
+                    <input type="date" th:field="${flightRequest.departureDate}" required="">
+                </div>
+                <div>
+                    <p>Arrival Date</p>
+                    <p th:errors="${flightRequest.arrivalDate}">Error</p>
+                    <input type="date" th:field="${flightRequest.arrivalDate}" required="">
+                </div>
+                <div>
+                    <p>Number of passenger</p>
+                    <p th:errors="${flightRequest.numberOfPassenger}">Error</p>
+                    <input type="number" th:field="${flightRequest.numberOfPassenger}" placeholder="">
+                </div>
+                <div>
+                    <p>One-way flight?</p>
+                    <p th:errors="${flightRequest.inBothDirections}">Error</p>
+                    <input type="checkbox" th:field="${flightRequest.inBothDirections}" placeholder="true">
+                </div>
+                <div>
+                    <p>Connecting flight</p>
+                    <p th:errors="${flightRequest.connectingFlight}">Error</p>
+                    <input type="checkbox" th:field="${flightRequest.connectingFlight}" placeholder="true">
+                </div>
+                <div>
+                    <button class="form-button" type="submit">Search</button>
+                </div>
             </form>
         </div>
         <p>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div style="border: 1px solid blue" th:each="flight : ${flights}">
+            <p th:text="${flight.getId()}"></p>
+            <p th:text="${flight.getDepartureCity()}"></p>
+            <p th:text="${flight.getArrivalCity()}"></p>
+            <p th:text="${flight.getDepartureDateTime()}"></p>
+            <p th:text="${flight.getEstimatedArrivalDateTime()}"></p>
+            <a th:href="@{'/addToCart?flight_id=' + ${flight.getId()}}">Add to cart</a>
+        </div>
+    </div>
+</body>
+</html>
