@@ -7,10 +7,12 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.mswierczewski.skyfly.models.Flight;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
+@Transactional
 public interface FlightRepository extends JpaRepository<Flight, Long> {
 
     @Query ("SELECT f " +
@@ -37,5 +39,7 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
                                                              Pageable pageable);
 
  */
+
+    Flight getById(Long id);
 
 }

@@ -1,41 +1,43 @@
 package pl.mswierczewski.skyfly.dtos;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class FlightResponse {
+public class SearchFlightResponse {
 
-    private Long id;
+    private final List<Long> ids = new ArrayList<>();
     private String departureCity;
     private String arrivalCity;
+    private final List<String> stops = new ArrayList<>();
     private LocalDateTime departureDateTime;
     private LocalDateTime estimatedArrivalDateTime;
     private Integer distance;
     private Double price;
+    private final Set<Integer> numberOfFreePlaces = new HashSet<>();
 
-    public FlightResponse(){
+    public SearchFlightResponse(){
 
     }
 
-    public FlightResponse(Long id, String departureCity, String arrivalCity, LocalDateTime departureDateTime, LocalDateTime estimatedArrivalDateTime, Integer distance, Double price) {
-        this.id = id;
+    public SearchFlightResponse(Long id, String departureCity, String arrivalCity, LocalDateTime departureDateTime,
+                                LocalDateTime estimatedArrivalDateTime, Integer distance, Double price, Integer numberOfFreePlaces) {
+        this.ids.add(id);
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
         this.departureDateTime = departureDateTime;
         this.estimatedArrivalDateTime = estimatedArrivalDateTime;
         this.distance = distance;
         this.price = price;
+        this.numberOfFreePlaces.add(numberOfFreePlaces);
     }
 
-    public Long getId() {
-        return id;
+    public List<Long> getIds() {
+        return ids;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getDepartureCity() {
         return departureCity;
@@ -77,10 +79,20 @@ public class FlightResponse {
         this.price = price;
     }
 
+    public List<String> getStops() {
+        return stops;
+    }
+
+    public Integer getNumberOfFreePlaces(){
+        return numberOfFreePlaces.stream()
+                .min(Integer::compareTo)
+                .orElse(0);
+    }
+
     @Override
     public String toString() {
-        return "FlightResponse{" +
-                "id=" + id +
+        return "SearchFlightResponse{" +
+                "ids=" + ids +
                 ", departureCity='" + departureCity + '\'' +
                 ", arrivalCity='" + arrivalCity + '\'' +
                 ", departureDateTime=" + departureDateTime +

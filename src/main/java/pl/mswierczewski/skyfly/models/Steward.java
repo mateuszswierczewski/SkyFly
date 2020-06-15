@@ -12,6 +12,6 @@ import java.util.List;
 public class Steward extends Employee implements Serializable {
 
     @OneToMany(mappedBy = "steward")
-    private List<LanguageProficiency> languages = new ArrayList<>();
+    private final List<LanguageProficiency> languages = new ArrayList<>();
 
 }

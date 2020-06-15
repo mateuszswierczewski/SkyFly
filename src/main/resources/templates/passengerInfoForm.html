@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add passenger</title>
+    <link th:href="@{/css/formStyle.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}"
+          rel="stylesheet">
+</head>
+<body>
+<div class="formContainer2">
+    <div>
+        <h1 th:text="'Please provide passenger ' + ${passenger.getId()} + ' details'">Please provide passenger details</h1>
+    </div>
+    <div>
+        <div>
+            <form method="post" th:action="@{'/addPassenger?id=' + ${passenger.getId()}} ">
+                <div class="text-input">
+                    <label for="firstName">First name<span class="red-dot">*</span></label>
+                    <label class="error-message" th:errors="${passenger.firstName}"></label>
+                    <input id="firstName" type="text" th:field="${passenger.firstName}" required="">
+                </div>
+                <div class="text-input">
+                    <label for="secondName">Second name</label>
+                    <br>
+                    <label class="error-message" th:errors="${passenger.secondName}">Second name error</label>
+                    <input id="secondName" type="text" th:field="${passenger.secondName}">
+                </div>
+                <div class="text-input">
+                    <label for="lastName">Last name<span class="red-dot">*</span></label>
+                    <br>
+                    <label class="error-message" th:errors="${passenger.lastName}">Last name error</label>
+                    <input id="lastName" type="text" th:field="${passenger.lastName}" required="">
+                </div>
+                <div class="text-input">
+                    <label for="birthDate">Birth date<span class="red-dot">*</span></label>
+                    <br>
+                    <label class="error-message" th:errors="${passenger.birthDate}">BirthDate error</label>
+                    <input id="birthDate" type="date" th:field="${passenger.birthDate}" required="">
+                </div>
+                <div class="button-div">
+                    <button type="submit">Add information</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

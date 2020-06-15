@@ -8,7 +8,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-public class FlightRequest {
+public class SearchFlightRequest {
 
     @NotNull
     private String departureCity;
@@ -22,15 +22,15 @@ public class FlightRequest {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate arrivalDate;
 
-    private boolean inBothDirections;
+    private boolean inBothDirections = true;
 
     private boolean connectingFlight;
 
     @Min(1)
     @Max(5)
-    private int numberOfPassenger;
+    private Integer numberOfPassenger;
 
-    public FlightRequest(){
+    public SearchFlightRequest(){
 
     }
 
@@ -82,17 +82,24 @@ public class FlightRequest {
         this.connectingFlight = connectingFlight;
     }
 
-    public int getNumberOfPassenger() {
+    public Integer getNumberOfPassenger() {
         return numberOfPassenger;
     }
 
-    public void setNumberOfPassenger(int numberOfPassenger) {
+    public void setNumberOfPassenger(Integer numberOfPassenger) {
         this.numberOfPassenger = numberOfPassenger;
+    }
+
+    public SearchFlightRequest reverseDirection(){
+        String tmp = this.departureCity;
+        this.departureCity = this.arrivalCity;
+        this.arrivalCity = tmp;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "FlightRequest{" +
+        return "SearchFlightRequest{" +
                 "departure='" + departureCity + '\'' +
                 ", arrival='" + arrivalCity + '\'' +
                 ", departureDate=" + departureDate +

@@ -88,7 +88,6 @@ public class ContactDetails implements Serializable {
                 ", address='" + address + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
-                ", person=" + person +
                 '}';
     }
 }

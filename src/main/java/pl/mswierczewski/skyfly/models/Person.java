@@ -8,6 +8,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.Period;
 
 @Entity(name = "persons")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -97,6 +98,10 @@ public abstract class Person implements Serializable {
     public void setContactDetails(ContactDetails contactDetails) {
         contactDetails.setPerson(this);
         this.contactDetails = contactDetails;
+    }
+
+    public int getAge(){
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     @Override

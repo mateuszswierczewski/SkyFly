@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.getUsername()}"></title>
+    <link th:href="@{/css/formStyle.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}" rel="stylesheet">
+</head>
+<body>
+<div th:class="formContainer2">
+    <div>
+        <h1>Please confirm your personal data</h1>
+    </div>
+    <div>
+        <p>
+            <span>First name: </span>
+            <span th:text="${user.getUserDetails().getFirstName()}"></span>
+        </p>
+        <p>
+            <span>Second name: </span>
+            <span th:text="${user.getUserDetails().getSecondName()}"></span>
+        </p>
+        <p>
+            <span>Last name: </span>
+            <span th:text="${user.getUserDetails().getLastName()}"></span>
+        </p>
+        <p>
+            <span>Birth date: </span>
+            <span th:text="${user.getUserDetails().getBirthDate()}"></span>
+        </p>
+        <a th:href="@{'/confirmPersonalData'}">Confirm</a>
+    </div>
+</div>
+</body>
+</html>

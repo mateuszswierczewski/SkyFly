@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Summary</h1>
+        </div>
+        <div th:each="response : ${flightSummaryResponses}">
+            <div>
+                <span th:text="${response.getFlightId()}"></span>
+                <span th:text="${response.getFrom()}"></span>
+                <span th:text="${response.getTo()}"></span>
+                <span th:text="${response.getDepartureTime()}"></span>
+            </div>
+            <div>
+                <span th:text="${response.getNumberOfAdults()}"></span>
+                <span th:text="${response.getNumberOfTeenagers()}"></span>
+                <span th:text="${response.getNumberOfChildren()}"></span>
+                <span th:text="${response.getNumberOfSmallChildren()}"></span>
+                <span th:text="${response.getSum()}"></span>
+            </div>
+        </div>
+        <div>
+            <a >Cancel</a>
+            <a th:href="@{buyTickets}">Buy</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,17 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}"
+          rel="stylesheet">
 </head>
 <body>
-    <div>
-        <div style="border: 1px solid blue" th:each="flight : ${flights}">
-            <p th:text="${flight.getId()}"></p>
-            <p th:text="${flight.getDepartureCity()}"></p>
-            <p th:text="${flight.getArrivalCity()}"></p>
-            <p th:text="${flight.getDepartureDateTime()}"></p>
-            <p th:text="${flight.getEstimatedArrivalDateTime()}"></p>
-            <a th:href="@{'/addToCart?flight_id=' + ${flight.getId()}}">Add to cart</a>
-        </div>
+<div class="flight-content">
+    <div class="searchFlightForm">
+        <form method="post" th:action="@{/searchFlights}">
+            <h2>Search flights</h2>
+            <div>
+                <div class="searchFrom">
+                    <label>
+                        FROM
+                        <label th:errors="${searchFlightRequest.departureCity}">Error</label>
+                        <select class="selectCity" th:field="${searchFlightRequest.departureCity}">
+                            <option hidden value=" "> Departure city</option>
+                            <optgroup th:each="cities : ${allCitiesWithCountry}" th:label="${cities.key}">
+                                <option th:each="city : ${cities.value}" th:value="${city}"
+                                        th:text="${city}"></option>
+                            </optgroup>
+                        </select>
+                    </label>
+                </div>
+                <div class="searchTo">
+                    <label>
+                        TO
+                        <label th:errors="${searchFlightRequest.arrivalCity}">Error</label>
+                        <select class="selectCity" th:field="${searchFlightRequest.arrivalCity}">
+                            <option hidden value=" "> Departure city</option>
+                            <optgroup th:each="cities : ${allCitiesWithCountry}" th:label="${cities.key}">
+                                <option th:each="city : ${cities.value}" th:value="${city}"
+                                        th:text="${city}"></option>
+                            </optgroup>
+                        </select>
+                    </label>
+                </div>
+            </div>
+            <div class="searchOneWayFlight">
+                <label>
+                    <label th:errors="${searchFlightRequest.inBothDirections}">Error</label>
+                    <input th:id="inBothDirections" class="checkmark" type="checkbox"
+                           th:field="${searchFlightRequest.inBothDirections}" checked="checked">
+                    IN BOTH DIRECTIONS?
+                </label>
+            </div>
+            <div class="searchConnectingFlights">
+                <label>
+                    <label th:errors="${searchFlightRequest.connectingFlight}">Error</label>
+                    <input class="checkmark" type="checkbox" th:field="${searchFlightRequest.connectingFlight}">
+                    CONNECTING FLIGHT?
+                </label>
+            </div>
+            <div class="searchPassengersNumber">
+                <label>
+                    NUMBER OF PASSENGER
+                    <label th:errors="${searchFlightRequest.numberOfPassenger}">Error</label>
+                    <input class="searchPassengersNumberInput" type="number"
+                           th:field="${searchFlightRequest.numberOfPassenger}" min="1" max="5" value="1"
+                           required="">
+                </label>
+            </div>
+            <div class="searchDepartureDate">
+                <label>
+                    DEPARTURE DATE
+                    <label th:errors="${searchFlightRequest.departureDate}">Error</label>
+                    <input class="searchDateInput" type="date" th:field="${searchFlightRequest.departureDate}"
+                           required="">
+                </label>
+            </div>
+            <div class="searchArrivalDate">
+                <label>
+                    ARRIVAL DATE
+                    <label th:errors="${searchFlightRequest.arrivalDate}">Error</label>
+                    <input class="searchDateInput" type="date" th:field="${searchFlightRequest.arrivalDate}">
+                </label>
+            </div>
+            <div class="searchButtonDiv">
+                <button class="searchButton" type="submit">SEARCH</button>
+            </div>
+        </form>
     </div>
+
+    <div th:if="${departureFlights != null}">
+        <form method="post" th:action="@{/selectFlights}">
+            <div>
+                <div class="flight-title">
+                    <h2>Departure flights</h2>
+                </div>
+                <div style="clear: both" th:each="flight : ${departureFlights}">
+                    <label style="clear: both">
+                        <input class="radio-button-flight" type="radio" name="departure" th:value="${flight.getIds()}"
+                               th:field="${selectedFlights.departureFlight}" required="">
+                        <div class="flight-div">
+                            <div class="flight-div-left">
+                                <div>
+                                    <span th:text="${flight.getDepartureCity()}"></span>
+                                    <span> - </span>
+                                    <span th:text="${flight.getArrivalCity()}"></span>
+                                    <span th:if="${not #lists.isEmpty(flight.getStops())}">With stops</span>
+                                </div>
+                                <div>
+                                    <span>Departure time: </span>
+                                    <span th:text="${flight.getDepartureDateTime()}"></span>
+                                </div>
+                                <div>
+                                    <span>Estimated arrival time: </span>
+                                    <span th:text="${flight.getEstimatedArrivalDateTime()}"></span>
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="flight-div-right">
+                                <div>
+                                    <span class="price-span" th:text="${flight.getPrice()}"></span>
+                                    <span>$</span>
+                                </div>
+                                <div>
+                                    <span th:text="${flight.getNumberOfFreePlaces()}"></span>
+                                    <span> seats left!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div th:if="${arrivalFlights != null}">
+                <div class="flight-title">
+                    <h2>Arrival flights</h2>
+                </div>
+                <div style="clear: both" th:each="flight : ${arrivalFlights}">
+                    <label style="clear: both">
+                        <input class="radio-button-flight" type="radio" name="arrival" th:value="${flight.getIds()}"
+                               th:field="${selectedFlights.arrivalFlight}">
+                        <div class="flight-div">
+                            <div class="flight-div-left">
+                                <div>
+                                    <span th:text="${flight.getDepartureCity()}"></span>
+                                    <span> - </span>
+                                    <span th:text="${flight.getArrivalCity()}"></span>
+                                    <span th:if="${not #lists.isEmpty(flight.getStops())}">With stops</span>
+                                </div>
+                                <div>
+                                    <span>Departure time: </span>
+                                    <span th:text="${flight.getDepartureDateTime()}"></span>
+                                </div>
+                                <div>
+                                    <span>Estimated arrival time: </span>
+                                    <span th:text="${flight.getEstimatedArrivalDateTime()}"></span>
+                                </div>
+                                <div style="clear: both">
+                                </div>
+                            </div>
+                            <div class="flight-div-right">
+                                <div>
+                                    <span class="price-span" th:text="${flight.getPrice()}"></span>
+                                    <span>$</span>
+                                </div>
+                                <div>
+                                    <span th:text="${flight.getNumberOfFreePlaces()}"></span>
+                                    <span> seats left!</span>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+            <div class="flight-button-div">
+                <button type="submit">Continue</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

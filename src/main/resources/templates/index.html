@@ -1,150 +1,99 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>SkyFly</title>
-    <link href="/css/homestyle.css" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}"
+          rel="stylesheet">
 </head>
 <body>
-<div id="wrapper">
-    <div id="nav">
-        <div id="logoDiv">
-            <a id="logo" th:href="@{/}">SkyFly</a>
+<div>
+    <div class="menuBar">
+        <div class="logoMenuDiv">
+            <a class="logoMenu" th:href="@{/}">SkyFly</a>
         </div>
-        <div id="buttonsDiv">
-            <a id="registerButton" class="userButtons" th:href="@{/register}">Sign up</a>
-            <a id="loginButton" class="userButtons" th:href="@{/login}">Log in</a>
-            <a href="#">tmp1</a>
-            <a href="#">tmp2</a>
-            <a href="#">tmp3</a>
+        <div class="menuButtonsDiv">
+            <a id="registerButton" class="menuButtons" th:href="@{/register}">Sign up</a>
+            <a id="loginButton" class="menuButtons" th:href="@{/login}">Sign in</a>
         </div>
     </div>
-    <div id="content">
-        <div id="searchFligth">
+    <div class="index-content">
+        <div class="motto">
+            <h1>FLY WITH US<br>CHEAP & SAFE</h1>
+        </div>
+        <div class="searchFlightForm">
             <form method="post" th:action="@{/searchFlights}">
                 <h2>Search flights</h2>
                 <div>
-                    <label>From</label>
-                    <label th:errors="${flightRequest.departureCity}">Error</label>
-                    <select th:field="${flightRequest.departureCity}">
-                        <option hidden value=" "> Departure city </option>
-                        <optgroup th:each="cities : ${allCitiesWithCountry}"  th:label="${cities.key}">
-                            <option th:each="city : ${cities.value}" th:value="${city}" th:text="${city}"></option>
-                        </optgroup>
-                    </select>
+                    <div class="searchFrom">
+                        <label>
+                            FROM
+                            <label th:errors="${searchFlightRequest.departureCity}">Error</label>
+                            <select class="selectCity" th:field="${searchFlightRequest.departureCity}">
+                                <option hidden value=" "> Departure city</option>
+                                <optgroup th:each="cities : ${allCitiesWithCountry}" th:label="${cities.key}">
+                                    <option th:each="city : ${cities.value}" th:value="${city}"
+                                            th:text="${city}"></option>
+                                </optgroup>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="searchTo">
+                        <label>
+                            TO
+                            <label th:errors="${searchFlightRequest.arrivalCity}">Error</label>
+                            <select class="selectCity" th:field="${searchFlightRequest.arrivalCity}">
+                                <option hidden value=" "> Departure city</option>
+                                <optgroup th:each="cities : ${allCitiesWithCountry}" th:label="${cities.key}">
+                                    <option th:each="city : ${cities.value}" th:value="${city}"
+                                            th:text="${city}"></option>
+                                </optgroup>
+                            </select>
+                        </label>
+                    </div>
                 </div>
-                <div>
-                    <p>To</p>
-                    <p th:errors="${flightRequest.arrivalCity}">Error</p>
-                    <select th:field="${flightRequest.arrivalCity}">
-                        <option hidden value=" "> Departure city </option>
-                        <optgroup th:each="cities : ${allCitiesWithCountry}"  th:label="${cities.key}">
-                            <option th:each="city : ${cities.value}" th:value="${city}" th:text="${city}"></option>
-                        </optgroup>
-                    </select>
+                <div class="searchOneWayFlight">
+                    <label>
+                    <label th:errors="${searchFlightRequest.inBothDirections}">Error</label>
+                    <input th:id="inBothDirections" class="checkmark" type="checkbox" th:field="${searchFlightRequest.inBothDirections}" checked="checked">
+                        ONE-WAY FLIGHT?
+                    </label>
                 </div>
-                <div>
-                    <p>Departure Date</p>
-                    <p th:errors="${flightRequest.departureDate}">Error</p>
-                    <input type="date" th:field="${flightRequest.departureDate}" required="">
+                <div class="searchConnectingFlights">
+                    <label>
+                    <label th:errors="${searchFlightRequest.connectingFlight}">Error</label>
+                    <input class="checkmark" type="checkbox" th:field="${searchFlightRequest.connectingFlight}">
+                        CONNECTING FLIGHT?
+                    </label>
                 </div>
-                <div>
-                    <p>Arrival Date</p>
-                    <p th:errors="${flightRequest.arrivalDate}">Error</p>
-                    <input type="date" th:field="${flightRequest.arrivalDate}" required="">
+                <div class="searchPassengersNumber">
+                    <label>
+                        NUMBER OF PASSENGER
+                        <label th:errors="${searchFlightRequest.numberOfPassenger}">Error</label>
+                        <input class="searchPassengersNumberInput" type="number" th:field="${searchFlightRequest.numberOfPassenger}" min="1" max="5" value="1"
+                               required="">
+                    </label>
                 </div>
-                <div>
-                    <p>Number of passenger</p>
-                    <p th:errors="${flightRequest.numberOfPassenger}">Error</p>
-                    <input type="number" th:field="${flightRequest.numberOfPassenger}" placeholder="">
+                <div class="searchDepartureDate">
+                    <label>
+                        DEPARTURE DATE
+                    <label th:errors="${searchFlightRequest.departureDate}">Error</label>
+                    <input class="searchDateInput" type="date" th:field="${searchFlightRequest.departureDate}" required="">
+                    </label>
                 </div>
-                <div>
-                    <p>One-way flight?</p>
-                    <p th:errors="${flightRequest.inBothDirections}">Error</p>
-                    <input type="checkbox" th:field="${flightRequest.inBothDirections}" placeholder="true">
+                <div class="searchArrivalDate">
+                    <label>
+                        ARRIVAL DATE
+                        <label th:errors="${searchFlightRequest.arrivalDate}">Error</label>
+                        <input class="searchDateInput" type="date" th:field="${searchFlightRequest.arrivalDate}">
+                    </label>
                 </div>
-                <div>
-                    <p>Connecting flight</p>
-                    <p th:errors="${flightRequest.connectingFlight}">Error</p>
-                    <input type="checkbox" th:field="${flightRequest.connectingFlight}" placeholder="true">
-                </div>
-                <div>
-                    <button class="form-button" type="submit">Search</button>
+                <div class="searchButtonDiv">
+                    <button class="searchButton" type="submit">SEARCH</button>
                 </div>
             </form>
         </div>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus aliquet risus non sapien euismod tempor.
-            Fusce ex tortor, facilisis nec libero euismod, lacinia ullamcorper metus. Nulla at nunc ac orci pellentesque
-            lacinia. Cras pretium malesuada urna quis auctor. Donec viverra sodales tellus, eget tristique nulla
-            vestibulum eget. Fusce elementum consequat nulla sed venenatis. Praesent in orci convallis, posuere libero
-            eu, fermentum massa. Integer vestibulum mi nibh, at dapibus purus vestibulum a. Suspendisse potenti. Nullam
-            ac augue sit amet turpis dapibus feugiat.
-        </p>
-        <p>
-            Morbi egestas sapien a magna euismod porta. Vestibulum volutpat pulvinar justo, id pharetra mauris dictum
-            non. Nam condimentum fringilla dolor, vel luctus diam sodales vel. Suspendisse faucibus orci mauris, sit
-            amet pulvinar massa tristique ut. Nulla facilisi. Quisque hendrerit, diam congue efficitur ultrices, tellus
-            dui rhoncus eros, a faucibus ligula massa feugiat ante. Donec aliquet, mauris sed consequat aliquam, mi arcu
-            fringilla lorem, a ornare mi ex id odio.
-        </p>
-        <p>
-            Proin ultrices felis eu dictum tincidunt. Fusce nec dolor id dui pharetra ullamcorper. Pellentesque dictum
-            vulputate enim et convallis. Ut convallis gravida commodo. Fusce id risus quam. Vivamus semper hendrerit ex,
-            vel finibus quam consectetur in. Aenean venenatis lacus a turpis consequat, sit amet fermentum libero
-            gravida. Fusce vulputate egestas congue. Nam interdum faucibus magna vitae convallis. Ut neque nisi,
-            venenatis sit amet metus eu, sodales rhoncus sapien. Proin ultricies ex a mi scelerisque ornare.
-            Pellentesque lacus magna, blandit eget orci vitae, feugiat mollis massa. Sed ut urna tincidunt, mattis nisi
-            id, auctor ex. Etiam porta leo at erat scelerisque, ac pretium augue convallis.
-        </p>
-        <p>
-            Integer a aliquam lectus. Quisque gravida magna ac aliquam molestie. Sed at ornare nibh. In nunc libero,
-            convallis vel aliquet ut, pharetra non purus. Cras a dapibus dui. Vivamus pulvinar feugiat arcu, id rhoncus
-            quam rutrum sed. Suspendisse leo erat, accumsan sit amet ullamcorper in, commodo sed arcu. Nunc dapibus,
-            turpis et aliquam mollis, purus velit tempus purus, vel vehicula est ex ut velit. Duis dignissim odio quis
-            eros feugiat, ut dapibus eros feugiat. Ut ut sem sit amet nunc ultricies convallis non sit amet magna.
-            Integer consectetur, dolor rutrum facilisis porta, magna urna suscipit diam, sit amet viverra lorem elit
-            quis diam. Ut ultricies turpis ut tellus sagittis sollicitudin. Donec consequat finibus hendrerit. Sed eu ex
-            ac nisi gravida venenatis. Nunc arcu erat, viverra sed libero vitae, cursus sollicitudin velit. Donec quis
-            purus ex.
-        </p>
-        <p>
-            Cras ac magna nisi. Sed sollicitudin ullamcorper placerat. Praesent vitae tristique odio. Donec id quam vel
-            enim efficitur laoreet semper non velit. Integer vehicula lacus ac purus finibus eleifend. Quisque vitae
-            lacus vitae velit hendrerit pretium. Sed suscipit leo vitae ex feugiat fringilla. Mauris semper eget purus
-            vel porttitor. Nullam pretium in mi non aliquam. Nullam maximus justo nec sapien tincidunt vulputate. Duis a
-            nisi ipsum. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer at sapien nec enim
-            convallis accumsan quis iaculis mi. Praesent tellus justo, consectetur nec justo vulputate, semper
-            scelerisque lectus. Aliquam erat volutpat.
-        </p>
-        <p>
-            Donec sit amet est magna. Quisque sem tellus, egestas nec sem et, scelerisque varius nisl. Sed ut nibh at
-            est faucibus lacinia. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras auctor leo sit amet
-            velit fermentum ultricies. Vivamus sagittis ultrices malesuada. Fusce aliquet venenatis lobortis. Nam sed
-            porta libero. In venenatis pharetra quam id sodales. Cras fringilla dignissim nunc, eu finibus lorem
-            hendrerit sed. Proin sed leo non enim tempus sollicitudin. In ullamcorper pharetra nisl, sit amet varius
-            purus pellentesque non. Nunc a leo nec erat facilisis tincidunt et quis erat.
-        </p>
-        <p>
-            Ut feugiat iaculis eros, et pellentesque tortor suscipit auctor. Sed eget eros dui. Pellentesque habitant
-            morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean faucibus ornare nulla, in
-            lacinia tortor eleifend a. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-            mus. Quisque vestibulum elit augue, et tincidunt elit vestibulum eget. Lorem ipsum dolor sit amet,
-            consectetur adipiscing elit. Mauris dignissim arcu non justo congue, non pellentesque purus malesuada.
-            Vestibulum euismod egestas posuere. Morbi volutpat diam at accumsan dapibus. In leo magna, fringilla quis
-            quam sit amet, volutpat condimentum orci. Donec ut arcu nisl. Duis suscipit neque vel justo eleifend cursus.
-            Fusce odio orci, posuere eu mollis fermentum, tincidunt ac nisi. Sed volutpat lacinia malesuada.
-        </p>
-        <p>
-            Quisque convallis mollis laoreet. Morbi sed tempus est. Etiam eget cursus sapien. Maecenas eleifend blandit
-            nulla ut ornare. Nulla in felis mi. Aenean quis elit sit amet purus laoreet lobortis. Donec accumsan euismod
-            efficitur. Fusce porttitor tortor et accumsan rutrum. Aliquam ullamcorper scelerisque scelerisque. Interdum
-            et malesuada fames ac ante ipsum primis in faucibus. Donec malesuada diam in lectus volutpat, at lobortis
-            nibh porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis, lectus id
-            faucibus tempus, enim est viverra velit, a volutpat orci quam ut mauris. Pellentesque ut ante ante. Duis
-            ultricies in ipsum sit amet laoreet.
-        </p>
     </div>
 </div>
 </body>

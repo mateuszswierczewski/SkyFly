@@ -2,76 +2,82 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{registerForm.title}">Title</title>
-    <link th:href="@{/css/userstyle.css}" rel="stylesheet" type="text/css"/>
+    <title>Sign up</title>
+    <link th:href="@{/css/formStyle.css}" rel="stylesheet" type="text/css"/>
     <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}" rel="stylesheet">
 </head>
 <body>
-    <div id="userForm">
+    <div class="formContainer">
         <form action="#" method="post" th:action="@{/register}">
-            <h2 th:text="#{registerForm.header}">Registration to SkyFly</h2>
+            <h1>Sign up</h1>
 
-            <div>
-                <!-- <p th:text="#{form.username}">Username<span class="red-dot">*</span></p> -->
-                <p th:errors="${user.username}">Username error</p>
-                <input id="username" type="text" th:field="${user.username}" th:placeholder="#{form.username}" required=""/>
+            <div class="text-input">
+                <label for="username">Username<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${user.username}">Username error</label>
+                <input id="username" type="text" th:field="${user.username}" placeholder="Username" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.password}">Password<span class="red-dot">*</span></p>-->
-                <p th:errors="${user.password}">Password error</p>
-                <input id="password" type="password" th:field="${user.password}" th:placeholder="#{form.password}" required=""/>
+            <div class="text-input">
+                <label for="password">Password<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${user.password}">Password error</label>
+                <input id="password" type="password" th:field="${user.password}" placeholder="*********" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.firstName}">First name<span class="red-dot">*</span></p>-->
-                <p th:errors="${passenger.firstName}">First name error</p>
-                <input id="firstName" type="text" th:field="${passenger.firstName}" th:placeholder="#{form.firstName}" required=""/>
+            <div class="text-input">
+                <label for="firstName">First name<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${passenger.firstName}">First name error</label>
+                <input id="firstName" type="text" th:field="${passenger.firstName}" placeholder="First name" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.secondName}">Second name</p>-->
-                <p th:errors="${passenger.secondName}">Second name error</p>
-                <input id="secondName" type="text" th:field="${passenger.secondName}" th:placeholder="#{form.secondName}"/>
+            <div class="text-input">
+                <label for="secondName">Second name</label>
+                <br>
+                <label class="error-message" th:errors="${passenger.secondName}">Second name error</label>
+                <input id="secondName" type="text" th:field="${passenger.secondName}" placeholder="Second name"/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.lastName}">Last name<span class="red-dot">*</span></p>-->
-                <p th:errors="${passenger.lastName}">Last name error</p>
-                <input id="lastName" type="text" th:field="${passenger.lastName}" th:placeholder="#{form.lastName}" required=""/>
+            <div class="text-input">
+                <label for="lastName">Last name<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${passenger.lastName}">Last name error</label>
+                <input id="lastName" type="text" th:field="${passenger.lastName}" placeholder="Last name" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.birthDate}">BirthDate<span class="red-dot">*</span></p>-->
-                <p th:errors="${passenger.birthDate}">BirthDate error</p>
-                <input id="birthDate" type="date" th:field="${passenger.birthDate}" th:placeholder="#{form.birthDate}" required=""/>
+            <div class="text-input">
+                <label for="birthDate">Birth date<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${passenger.birthDate}">BirthDate error</label>
+                <input id="birthDate" type="date" th:field="${passenger.birthDate}" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.email}">Email<span class="red-dot">*</span></p>-->
-                <p th:errors="${contact.email}">Email error</p>
-                <input id="email" type="text" th:field="${contact.email}" th:placeholder="#{form.email}" required=""/>
+            <div class="text-input">
+                <label for="email">Email<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${contact.email}">Email error</label>
+                <input id="email" type="text" th:field="${contact.email}" placeholder="example@abc.com" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.phoneNumber}">phoneNumber<span class="red-dot">*</span></p>-->
-                <p th:errors="${contact.phoneNumber}">Address error</p>
-                <input id="phoneNumber" type="number" th:field="${contact.phoneNumber}" th:placeholder="#{form.phoneNumber}" required=""/>
+            <div class="text-input">
+                <label for="phoneNumber">Phone number<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${contact.phoneNumber}">Address error</label>
+                <input id="phoneNumber" type="number" th:field="${contact.phoneNumber}" placeholder="111 222 333" required=""/>
             </div>
 
-            <div>
-                <!-- <p th:text="#{form.address}">Address<span class="red-dot">*</span></p> -->
-                <p th:errors="${contact.address}">Address error</p>
-                <input id="address" type="text" th:field="${contact.address}" th:placeholder="#{form.address}" required=""/>
+            <div class="text-input">
+                <label for="address">Address<span class="red-dot">*</span></label>
+                <br>
+                <label class="error-message" th:errors="${contact.address}">Address error</label>
+                <input id="address" type="text" th:field="${contact.address}" placeholder="Address" required=""/>
             </div>
 
-            <div>
+            <div class="text-input">
                 <button class="form-button" type="submit">Register</button>
             </div>
         </form>
-    </div>
-    <div id="content">
-
     </div>
 </body>
 </html>

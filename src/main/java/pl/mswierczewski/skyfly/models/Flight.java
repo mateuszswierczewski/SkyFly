@@ -8,6 +8,8 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "flights")
@@ -41,6 +43,9 @@ public class Flight implements Serializable {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     private Airport arrivalAirport;
+
+    @OneToMany(mappedBy = "flight")
+    private final List<Ticket> tickets = new ArrayList<>();
 
     public Flight(){
 
@@ -145,5 +150,19 @@ public class Flight implements Serializable {
         }
 
         return distance;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id=" + id +
+                ", departureDateTime=" + departureDateTime +
+                ", estimatedArrivalDateTime=" + estimatedArrivalDateTime +
+                ", standardPrice=" + standardPrice +
+                ", distance=" + distance +
+                ", airplane=" + airplane +
+                ", departureAirport=" + departureAirport +
+                ", arrivalAirport=" + arrivalAirport +
+                '}';
     }
 }

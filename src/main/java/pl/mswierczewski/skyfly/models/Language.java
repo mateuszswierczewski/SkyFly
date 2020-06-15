@@ -14,7 +14,7 @@ public class Language implements Serializable {
     private String languageName;
 
     @OneToMany(mappedBy = "language")
-    private List<LanguageProficiency> stewards = new ArrayList<>();
+    private final List<LanguageProficiency> stewards = new ArrayList<>();
 
     public Language(){ }
 

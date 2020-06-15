@@ -2,30 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <title>Login</title>
-    <link th:href="@{/css/userstyle.css}" rel="stylesheet" type="text/css"/>
-    <link th:href="@{https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;700&display=swap}" rel="stylesheet">
+    <title>Sign in</title>
+    <link th:href="@{/css/formStyle.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}" rel="stylesheet">
 </head>
 <body>
 <div class="formContainer">
     <form method="post" th:action="@{/login}">
-        <h2 class="">Please login to SkyFly</h2>
-        <p>
+        <h1 class="">Please sign in</h1>
+        <div class="text-input">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" placeholder="Username" required="">
-        </p>
-        <p>
+        </div>
+        <div class="text-input">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Password" required="">
-        </p>
-        <button class="form-button" type="submit">Login</button>
+        </div>
+        <div class="text-input">
+            <button class="form-button" type="submit">Login</button>
+        </div>
     </form>
-</div>
-<div class="formContainer">
-    <h3>You don't have a account?</h3>
-    <form method="get" th:action="@{/register}">
-        <button class="form-button2" type="submit">Register</button>
-    </form>
+    <div class="sign-up-div">
+        <h3>You don't have an account?</h3>
+        <a th:href="@{/register}">Sign up</a>
+    </div>
 </div>
 </body>
 </html>

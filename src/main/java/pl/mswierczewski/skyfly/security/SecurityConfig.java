@@ -29,12 +29,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/", "/register", "/css/**", "/images/**", "/searchFlights", "/flights").permitAll()
-                    //.anyRequest().authenticated()
+                    .antMatchers("/", "/register", "/css/**", "/images/**", "/searchFlights", "/flights", "/addToCart").permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .formLogin()
                     .loginPage("/login").permitAll()
-                    .defaultSuccessUrl("/", true)
+                    .defaultSuccessUrl("/", false)
                     .passwordParameter("password")
                     .usernameParameter("username")
                 .and()

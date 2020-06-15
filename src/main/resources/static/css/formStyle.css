@@ -1,0 +1,108 @@
+body{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("images/sky.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: #000000;
+    font-size: 28px;
+    font-family: 'Lato', serif;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+}
+
+.formContainer{
+    background-color: #FFFFFF;
+    width: 500px;
+    min-height: 895px;
+    margin-left: 200px;
+    margin-right: auto;
+    padding: 25px 50px 50px 50px;
+}
+
+.formContainer2{
+    background-color: #FFFFFF;
+    width: 500px;
+    margin: 20px auto;
+    padding: 25px 50px 50px 50px;
+}
+
+.text-input{
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+input{
+    height: auto;
+    font-size: 25px;
+    padding: 10px;
+    width: 100%;
+    margin: 5px 0;
+    outline: none;
+    background: transparent;
+    border: 1px solid grey;
+    box-sizing: border-box;
+}
+
+button{
+    width: 100%;
+    height: auto;
+    font-size: 30px;
+    background-color: #3079ff;
+    color: #FFFFFF;
+    padding: 10px 0;
+    border: none;
+}
+
+button:hover{
+    background-color: #2068ee;
+    cursor: pointer;
+}
+
+.sign-up-div{
+    padding-top: 100px;
+    text-align: center;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    width: 100%;
+    background-color: #59d457;
+    color: #FFFFFF;
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+a:hover{
+    background-color: #48c346;
+}
+.red-dot{
+    color: red;
+}
+
+.error-message{
+    font-size: 14px;
+    color: red;
+    height: 5px;
+    display:inline-block;
+}
+
+.button-div{
+    padding-top: 30px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
