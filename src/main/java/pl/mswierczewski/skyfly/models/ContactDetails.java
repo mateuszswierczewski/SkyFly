@@ -17,21 +17,21 @@ public class ContactDetails implements Serializable {
     @Column(name = "id_contact")
     private Integer id;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.address.NotNull.message}")
+    @NotNull(message = "The address cannot be empty")
     private String address;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.phoneNumber.NotNull.message}")
+    @NotNull(message = "Please give your phone number")
     private Integer phoneNumber;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.NotNull.message}")
-    @Email(message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.Email.message}")
+    @NotNull(message = "Please give your email")
+    @Email(message = "This email is not valid")
     @Unique(serviceClass = ContactDetailsService.class, columnName = "email",
-            message = "{pl.mswierczewski.skyfly.models.ContactDetails.email.Unique.message}")
+            message = "This email is already taken")
     private String email;
 
     @OneToOne(mappedBy = "contactDetails")
     @Fetch(FetchMode.SELECT)
-    private Person person;
+    private SkyFlyUser user;
 
     public ContactDetails(){ }
 
@@ -73,12 +73,12 @@ public class ContactDetails implements Serializable {
         this.email = email;
     }
 
-    public Person getPerson() {
-        return person;
+    public SkyFlyUser getUser() {
+        return user;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setUser(SkyFlyUser user) {
+        this.user = user;
     }
 
     @Override

@@ -55,8 +55,10 @@
                 </div>
                 <div class="searchOneWayFlight">
                     <label>
-                    <label th:errors="${searchFlightRequest.inBothDirections}">Error</label>
-                    <input th:id="inBothDirections" class="checkmark" type="checkbox" th:field="${searchFlightRequest.inBothDirections}" checked="checked">
+                    <label th:errors="${searchFlightRequest.inOneWay}">Error</label>
+                    <input id="oneWayCheckbox" class="checkmark" type="checkbox" th:field="${searchFlightRequest.inOneWay}" checked="checked"
+                           onclick=" const input = document.getElementById('arrivalDateInput');
+                           if (this.checked){input.disabled = true; input.required = false}else{input.disabled = false; input.required = true}">
                         ONE-WAY FLIGHT?
                     </label>
                 </div>
@@ -86,7 +88,7 @@
                     <label>
                         ARRIVAL DATE
                         <label th:errors="${searchFlightRequest.arrivalDate}">Error</label>
-                        <input class="searchDateInput" type="date" th:field="${searchFlightRequest.arrivalDate}">
+                        <input id="arrivalDateInput" class="searchDateInput" type="date" th:field="${searchFlightRequest.arrivalDate}" disabled>
                     </label>
                 </div>
                 <div class="searchButtonDiv">

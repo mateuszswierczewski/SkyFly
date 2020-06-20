@@ -15,7 +15,7 @@ public class Ticket {
 
     private Double price;
 
-    @ManyToOne/*(cascade = {CascadeType.PERSIST, CascadeType.MERGE})*/
+    @ManyToOne
     @JoinColumn(nullable = false)
     private Passenger passenger;
 

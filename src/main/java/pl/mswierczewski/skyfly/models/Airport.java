@@ -12,25 +12,24 @@ import java.io.Serializable;
 public class Airport implements Serializable {
 
     @Id
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.airportCode.NotNull.message}")
-    @Unique(serviceClass = AirportService.class, columnName = "airportCode",
-            message ="{pl.mswierczewski.skyfly.models.Airport.airportCode.Unique.message}")
+    @NotNull
+    @Unique(serviceClass = AirportService.class, columnName = "airportCode")
     private String airportCode;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.name.NotNull.message}")
+    @NotNull
     private String name;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.city.NotNull.message}")
+    @NotNull
     private String city;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.country.NotNull.message}")
+    @NotNull
     private String country;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.latitude.NotNull.message}")
+    @NotNull
     @Column(precision = 10, scale = 13)
     private double latitude;
 
-    @NotNull(message = "{pl.mswierczewski.skyfly.models.Airport.longitude.NotNull.message}")
+    @NotNull
     @Column(precision = 10, scale = 13)
     private double longitude;
 

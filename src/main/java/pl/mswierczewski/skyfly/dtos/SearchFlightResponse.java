@@ -8,15 +8,15 @@ import java.util.Set;
 
 public class SearchFlightResponse {
 
-    private final List<Long> ids = new ArrayList<>();
+    private List<Long> ids = new ArrayList<>();
     private String departureCity;
     private String arrivalCity;
-    private final List<String> stops = new ArrayList<>();
+    private List<String> stops = new ArrayList<>();
     private LocalDateTime departureDateTime;
     private LocalDateTime estimatedArrivalDateTime;
     private Integer distance;
     private Double price;
-    private final Set<Integer> numberOfFreePlaces = new HashSet<>();
+    private Set<Integer> numberOfFreePlaces = new HashSet<>();
 
     public SearchFlightResponse(){
 
@@ -32,6 +32,18 @@ public class SearchFlightResponse {
         this.distance = distance;
         this.price = price;
         this.numberOfFreePlaces.add(numberOfFreePlaces);
+    }
+
+    public SearchFlightResponse(List<Long> ids, String departureCity, String arrivalCity, List<String> stops,
+                                LocalDateTime departureDateTime, LocalDateTime arrivalDateTime, Double fullPrice, Set<Integer> numberOfFreePlaces) {
+        this.ids = ids;
+        this.departureCity = departureCity;
+        this.arrivalCity = arrivalCity;
+        this.stops = stops;
+        this.departureDateTime = departureDateTime;
+        this.estimatedArrivalDateTime = arrivalDateTime;
+        this.price = fullPrice;
+        this.numberOfFreePlaces = numberOfFreePlaces;
     }
 
     public List<Long> getIds() {

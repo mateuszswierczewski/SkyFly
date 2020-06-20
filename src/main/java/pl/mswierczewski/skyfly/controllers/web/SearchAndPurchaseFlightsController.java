@@ -16,10 +16,9 @@ import pl.mswierczewski.skyfly.dtos.SearchFlightResponse;
 import pl.mswierczewski.skyfly.dtos.SelectedFlights;
 import pl.mswierczewski.skyfly.models.Flight;
 import pl.mswierczewski.skyfly.models.Passenger;
-import pl.mswierczewski.skyfly.security.user.SkyFlyUser;
+import pl.mswierczewski.skyfly.models.SkyFlyUser;
 import pl.mswierczewski.skyfly.services.AirportService;
 import pl.mswierczewski.skyfly.services.FlightService;
-import pl.mswierczewski.skyfly.services.PassengerService;
 import pl.mswierczewski.skyfly.services.TicketService;
 
 import javax.validation.Valid;
@@ -34,15 +33,13 @@ import java.util.Map;
 public class SearchAndPurchaseFlightsController {
 
     private final FlightService flightService;
-    private final PassengerService passengerService;
     private final AirportService airportService;
     private final TicketService ticketService;
 
     @Autowired
-    public SearchAndPurchaseFlightsController(FlightService flightService, PassengerService passengerService,
-                                              AirportService airportService, TicketService ticketService){
+    public SearchAndPurchaseFlightsController(FlightService flightService, AirportService airportService,
+                                              TicketService ticketService){
         this.flightService = flightService;
-        this.passengerService = passengerService;
         this.airportService = airportService;
         this.ticketService = ticketService;
     }
@@ -54,8 +51,8 @@ public class SearchAndPurchaseFlightsController {
         List<SearchFlightResponse> departureFlights = flightService.getMatchingFlights(searchFlightRequest);
         redirectAttributes.addFlashAttribute("departureFlights", departureFlights);
 
-        if (searchFlightRequest.isInBothDirections()) {
-            List<SearchFlightResponse> arrivalFlights = flightService.getMatchingFlights(searchFlightRequest.reverseDirection());
+        if (!searchFlightRequest.isInOneWay()) {
+            List<SearchFlightResponse> arrivalFlights = flightService.getMatchingFlights(searchFlightRequest.reverseDirectionAndDate());
             redirectAttributes.addFlashAttribute("arrivalFlights", arrivalFlights);
         }
 
@@ -100,8 +97,9 @@ public class SearchAndPurchaseFlightsController {
 
     @GetMapping("/confirmPersonalData")
     public String confirmUserInfo(Model model, @SessionAttribute(value = "numberOfAdditionalPassengers") Integer numOfPassengers){
+        model.addAttribute("passengers", new HashMap<Integer, Passenger>());
+
         if (numOfPassengers > 0){
-            model.addAttribute("passengers", new HashMap<Integer, Passenger>());
             return "redirect:/add-passenger-info?id=" + 1;
         }
 
@@ -175,8 +173,11 @@ public class SearchAndPurchaseFlightsController {
             result = false;
         }
 
-        System.out.println(result);
-        return "redirect:";
+        if (result){
+            return "buySuccess";
+        } else {
+            return "buyError";
+        }
     }
 
 

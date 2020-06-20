@@ -1,9 +1,10 @@
-package pl.mswierczewski.skyfly.security.user;
+package pl.mswierczewski.skyfly.models;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.mswierczewski.skyfly.models.Person;
+import pl.mswierczewski.skyfly.security.user.SkyFlyUserRole;
+import pl.mswierczewski.skyfly.security.user.SkyFlyUserService;
 import pl.mswierczewski.skyfly.validation.constraints.Password;
 import pl.mswierczewski.skyfly.validation.constraints.Unique;
 
@@ -21,14 +22,14 @@ import java.util.stream.Collectors;
 public class SkyFlyUser implements UserDetails, Serializable {
 
     @Id
-    @NotNull(message = "{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.NotNull.message}")
-    @Size(min = 4, message ="{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.Size.message}")
+    @NotNull(message = "Please give your username")
+    @Size(min = 4, message = "The username must contain at least {min} characters")
     @Unique(serviceClass = SkyFlyUserService.class, columnName = "username",
-            message = "{pl.mswierczewski.skyfly.security.user.SkyFlyUser.username.Unique.message}")
+            message = "The username is already taken")
     private String username;
 
-    @Size(min = 6, max = 24, message = "{pl.mswierczewski.skyfly.security.user.SkyFlyUser.password.Size.message}")
-    @Password
+    @Size(min = 6, max = 24, message = "The password should be longer than 6 characters and shorter than 24")
+    @Password(message = "The password must contain at least one upper case letter, one lower case letter, one digit and one special character")
     private String password;
 
     @ElementCollection(targetClass = SkyFlyUserRole.class, fetch = FetchType.EAGER)
@@ -37,9 +38,14 @@ public class SkyFlyUser implements UserDetails, Serializable {
     @Enumerated(EnumType.STRING)
     private Set<SkyFlyUserRole> roles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_details", nullable = false)
     private Person userDetails;
+
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "contact_details")
+    protected ContactDetails contactDetails;
+
 
     @Transient
     private boolean isAccountNonExpired;
@@ -50,7 +56,7 @@ public class SkyFlyUser implements UserDetails, Serializable {
     @Transient
     private boolean isEnabled;
 
-    public SkyFlyUser(){
+    public SkyFlyUser() {
         initialize();
     }
 
@@ -61,7 +67,7 @@ public class SkyFlyUser implements UserDetails, Serializable {
         initialize();
     }
 
-    private void initialize(){
+    private void initialize() {
         this.isAccountNonExpired = true;
         this.isAccountNonLocked = true;
         this.isCredentialsNonExpired = true;
@@ -121,8 +127,16 @@ public class SkyFlyUser implements UserDetails, Serializable {
         return isEnabled;
     }
 
-    public void addRole(SkyFlyUserRole role){
+    public void addRole(SkyFlyUserRole role) {
         roles.add(role);
+    }
+
+    public ContactDetails getContactDetails() {
+        return contactDetails;
+    }
+
+    public void setContactDetails(ContactDetails contactDetails) {
+        this.contactDetails = contactDetails;
     }
 
     @Override

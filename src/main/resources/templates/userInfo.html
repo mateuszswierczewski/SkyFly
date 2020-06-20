@@ -28,6 +28,18 @@
             <span>Birth date: </span>
             <span th:text="${user.getUserDetails().getBirthDate()}"></span>
         </p>
+        <p>
+            <span>Email: </span>
+            <span th:text="${user.getContactDetails().getEmail()}"></span>
+        </p>
+        <p>
+            <span>Phone number: </span>
+            <span th:text="${user.getContactDetails().getPhoneNumber()}"></span>
+        </p>
+        <p>
+            <span>Address: </span>
+            <span th:text="${user.getContactDetails().getAddress()}"></span>
+        </p>
         <a th:href="@{'/confirmPersonalData'}">Confirm</a>
     </div>
 </div>

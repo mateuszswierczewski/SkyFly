@@ -2,31 +2,42 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Summary</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}"
+          rel="stylesheet">
 </head>
 <body>
-    <div>
-        <div>
+    <div class="summary-content">
+        <div class="summary-title-div">
             <h1>Summary</h1>
         </div>
-        <div th:each="response : ${flightSummaryResponses}">
-            <div>
-                <span th:text="${response.getFlightId()}"></span>
+        <div class="summary-table-main" th:each="response : ${flightSummaryResponses}">
+            <div class="summary-table-left">
+                <span th:text="'Flight #' + ${response.getFlightId()}"></span>
+                <br>
                 <span th:text="${response.getFrom()}"></span>
+                <br>
                 <span th:text="${response.getTo()}"></span>
+                <br>
                 <span th:text="${response.getDepartureTime()}"></span>
             </div>
-            <div>
-                <span th:text="${response.getNumberOfAdults()}"></span>
-                <span th:text="${response.getNumberOfTeenagers()}"></span>
-                <span th:text="${response.getNumberOfChildren()}"></span>
-                <span th:text="${response.getNumberOfSmallChildren()}"></span>
-                <span th:text="${response.getSum()}"></span>
+            <div class="summary-table-right">
+                <span th:text="${response.getNumberOfAdults()} + ' Adults'"></span>
+                <br>
+                <span th:text="${response.getNumberOfTeenagers()} + ' Teenagers'"></span>
+                <br>
+                <span th:text="${response.getNumberOfChildren()} + ' Children'"></span>
+                <br>
+                <span th:text="${response.getNumberOfSmallChildren()} + ' Small children'"></span>
+            </div>
+            <div class="summary-table-bottom">
+                <span th:text="'TOTAL: ' + ${response.getSum()} + '$'" class="red-string"></span>
             </div>
         </div>
-        <div>
-            <a >Cancel</a>
-            <a th:href="@{buyTickets}">Buy</a>
+        <div class="buttons-div">
+            <a class="cancelButton" >Cancel</a>
+            <a class="buyButton" th:href="@{buyTickets}">Buy</a>
         </div>
     </div>
 </body>

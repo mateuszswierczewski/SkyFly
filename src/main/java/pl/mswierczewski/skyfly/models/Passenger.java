@@ -12,8 +12,6 @@ import java.util.List;
 @DiscriminatorValue("Passenger")
 public class Passenger extends Person implements Serializable {
 
-
-
     @OneToMany(mappedBy = "passenger")
     List<Ticket> tickets = new ArrayList<>();
 
@@ -39,6 +37,14 @@ public class Passenger extends Person implements Serializable {
         } else {
             return 1;
         }
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override

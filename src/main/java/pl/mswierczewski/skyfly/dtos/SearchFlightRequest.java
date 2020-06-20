@@ -1,8 +1,8 @@
 package pl.mswierczewski.skyfly.dtos;
 
-
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,18 +17,20 @@ public class SearchFlightRequest {
     private String arrivalCity;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private LocalDate departureDate;
+    @Future(message = "Departure date must be set in future")
+    private LocalDate departureDate = LocalDate.now();
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @Future(message = "Departure date must be set in future")
     private LocalDate arrivalDate;
 
-    private boolean inBothDirections = true;
+    private boolean inOneWay = true;
 
-    private boolean connectingFlight;
+    private boolean connectingFlight = false;
 
     @Min(1)
     @Max(5)
-    private Integer numberOfPassenger;
+    private Integer numberOfPassenger = 1;
 
     public SearchFlightRequest(){
 
@@ -66,12 +68,12 @@ public class SearchFlightRequest {
         this.arrivalDate = arrivalDate;
     }
 
-    public boolean isInBothDirections() {
-        return inBothDirections;
+    public boolean isInOneWay() {
+        return inOneWay;
     }
 
-    public void setInBothDirections(boolean inBothDirections) {
-        this.inBothDirections = inBothDirections;
+    public void setInOneWay(boolean inOneWay) {
+        this.inOneWay = inOneWay;
     }
 
     public boolean isConnectingFlight() {
@@ -90,10 +92,13 @@ public class SearchFlightRequest {
         this.numberOfPassenger = numberOfPassenger;
     }
 
-    public SearchFlightRequest reverseDirection(){
+    public SearchFlightRequest reverseDirectionAndDate(){
         String tmp = this.departureCity;
         this.departureCity = this.arrivalCity;
         this.arrivalCity = tmp;
+        LocalDate date = this.departureDate;
+        this.departureDate = this.arrivalDate;
+        this.arrivalDate = date;
         return this;
     }
 
@@ -104,7 +109,7 @@ public class SearchFlightRequest {
                 ", arrival='" + arrivalCity + '\'' +
                 ", departureDate=" + departureDate +
                 ", arrivalDate=" + arrivalDate +
-                ", inBothDirections=" + inBothDirections +
+                ", inBothDirections=" + inOneWay +
                 ", numberOfPassenger=" + numberOfPassenger +
                 '}';
     }

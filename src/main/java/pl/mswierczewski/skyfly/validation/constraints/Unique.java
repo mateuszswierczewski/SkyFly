@@ -1,7 +1,6 @@
 package pl.mswierczewski.skyfly.validation.constraints;
 
 import pl.mswierczewski.skyfly.services.common.ValueExists;
-import pl.mswierczewski.skyfly.validation.validators.PasswordValidator;
 import pl.mswierczewski.skyfly.validation.validators.UniqueValidator;
 
 import javax.validation.Constraint;
@@ -19,7 +18,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Target({ METHOD, FIELD})
 @Retention(RUNTIME)
 public @interface Unique {
-    String message() default "{pl.mswierczewski.skyfly.validation.constraints.Unique.message}";
+    String message() default "Value is not unique";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
     Class<? extends ValueExists> serviceClass();

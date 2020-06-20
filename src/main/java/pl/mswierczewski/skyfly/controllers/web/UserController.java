@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.mswierczewski.skyfly.models.ContactDetails;
 import pl.mswierczewski.skyfly.models.Passenger;
-import pl.mswierczewski.skyfly.security.user.SkyFlyUser;
+import pl.mswierczewski.skyfly.models.SkyFlyUser;
 import pl.mswierczewski.skyfly.security.user.DefaultSkyFlyUserService;
 import pl.mswierczewski.skyfly.security.user.SkyFlyUserService;
 

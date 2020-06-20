@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.mswierczewski.skyfly.models.ContactDetails;
 import pl.mswierczewski.skyfly.models.Passenger;
+import pl.mswierczewski.skyfly.models.SkyFlyUser;
 
 
 import static pl.mswierczewski.skyfly.security.user.SkyFlyUserRole.ROLE_PASSENGER;
@@ -35,8 +36,8 @@ public class DefaultSkyFlyUserService implements SkyFlyUserService {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         user.addRole(ROLE_PASSENGER);
-        passenger.setContactDetails(contactDetails);
         user.setUserDetails(passenger);
+        user.setContactDetails(contactDetails);
         userRepository.save(user);
     }
 

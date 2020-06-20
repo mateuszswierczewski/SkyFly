@@ -20,23 +20,19 @@ public abstract class Person implements Serializable {
     protected Long id;
 
     @NotNull
-    @Size(min = 2, message = "{pl.mswierczewski.skyfly.models.Person.firstName.Size.message}")
+    @Size(min = 2, message = "Your first name must contain at least {min} characters")
     protected String firstName;
 
     protected String secondName; //optional
 
     @NotNull
-    @Size(min = 2, message = "{pl.mswierczewski.skyfly.models.Person.lastName.Size.message}")
+    @Size(min = 2, message = "Your last name must contain at least {min} characters")
     protected String lastName;
 
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    @Past(message = "{pl.mswierczewski.skyfly.models.Person.birthDate.Past.message}")
+    @Past(message = "The date must be set in the past")
     protected LocalDate birthDate;
-
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "contact_details")
-    protected ContactDetails contactDetails;
 
     public Person(){ }
 
@@ -91,28 +87,7 @@ public abstract class Person implements Serializable {
         this.birthDate = birthDate;
     }
 
-    public ContactDetails getContactDetails() {
-        return contactDetails;
-    }
-
-    public void setContactDetails(ContactDetails contactDetails) {
-        contactDetails.setPerson(this);
-        this.contactDetails = contactDetails;
-    }
-
     public int getAge(){
         return Period.between(birthDate, LocalDate.now()).getYears();
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", birthDate=" + birthDate +
-                ", contactDetails=" + contactDetails +
-                '}';
     }
 }

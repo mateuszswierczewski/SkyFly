@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Success</title>
+    <link href="/css/style.css" rel="stylesheet"/>
+    <link th:href="@{https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;1,700&display=swap}"
+          rel="stylesheet">
+</head>
+<body>
+<div class="summary-content">
+    <div class="message-div">
+        <h1 style="color: #e1352a">Something goes wrong!</h1>
+    </div>
+    <div class="buttons-div">
+        <a class="end-button" th:href="@{/}">Go to homepage!</a>
+    </div>
+</div>
+</body>
+</html>

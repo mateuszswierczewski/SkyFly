@@ -21,11 +21,11 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
             "AND f.arrivalAirport.airportCode = :arrivalAirportCode " +
             "AND f.departureDateTime >= :departureDate " +
             "ORDER BY f.departureDateTime")
-    List<Flight> findDirectFlightsForPassenger(@Param(value = "departureAirportCode") String departureAirportCode,
-                                               @Param(value = "arrivalAirportCode") String arrivalAirportCode,
-                                               @Param(value = "departureDate") LocalDateTime departureDate,
-                                               Pageable pageable);
-/*
+    List<Flight> findDirectFlights(@Param(value = "departureAirportCode") String departureAirportCode,
+                                   @Param(value = "arrivalAirportCode") String arrivalAirportCode,
+                                   @Param(value = "departureDate") LocalDateTime departureDate,
+                                   Pageable pageable);
+
     @Query ("SELECT f1, f2 " +
             "FROM Flight f1 " +
             "JOIN Flight f2 ON f1.arrivalAirport = f2.departureAirport " +
@@ -33,12 +33,12 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
             "WHERE f1.departureAirport.airportCode = :departureAirportCode " +
             "AND f2.arrivalAirport.airportCode = :arrivalAirportCode " +
             "AND f1.departureDateTime >= :departureDate")
-    List<Flight> findConnectedFlightsWithOneStopForPassenger(@Param(value = "departureAirportCode") String departureAirportCode,
-                                                             @Param(value = "arrivalAirportCode") String arrivalAirportCode,
-                                                             @Param(value = "departureDate") LocalDateTime departureDate,
-                                                             Pageable pageable);
+    List<List<Flight>> findConnectedFlightsWithOneStop(@Param(value = "departureAirportCode") String departureAirportCode,
+                                                 @Param(value = "arrivalAirportCode") String arrivalAirportCode,
+                                                 @Param(value = "departureDate") LocalDateTime departureDate,
+                                                 Pageable pageable);
 
- */
+
 
     Flight getById(Long id);
 

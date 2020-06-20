@@ -1,6 +1,5 @@
 package pl.mswierczewski.skyfly.models;
 
-import pl.mswierczewski.skyfly.models.enums.AirplaneStatus;
 import pl.mswierczewski.skyfly.models.enums.AirplaneType;
 
 import javax.persistence.*;

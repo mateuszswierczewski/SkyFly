@@ -234,7 +234,114 @@ h2{
     padding-top: 30px;
 }
 
+.summary-content{
+    margin-top: 20px;
+    width: 1500px;
+    margin-right: auto;
+    margin-left: auto;
+    overflow: hidden;
+}
 
+.summary-title-div{
+    width: 100%;
+    font-size: 40px;
+    background-color: #418aff;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-align: center;
+    height: auto;
+}
 
+.summary-table-main{
+    overflow: hidden;
+    border: 3px solid black;
+    padding: 10px;
+}
 
+.summary-table-left{
+    float: left;
+    width: 70%;
+}
 
+.summary-table-right{
+    float: left;
+    width: 29%;
+}
+
+.summary-table-bottom{
+    clear: both;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.red-string{
+    color: #f2463a;
+    font-weight: bold;
+    font-size: 35px;
+}
+
+.buttons-div{
+    margin-top: 20px;
+}
+
+.cancelButton{
+    float: left;
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #f2463a;
+    color: #FFFFFF;
+    padding-top: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.cancelButton:hover{
+    background-color: #e1352a;
+}
+
+.buyButton{
+    float: right;
+    display: block;
+    width: 200px;
+    height: 50px;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #3079ff;
+    color: #FFFFFF;
+    padding-top: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+.buyButton:hover{
+    background-color: #2068ee;
+}
+
+.message-div{
+    margin-top: 10px;
+    width: 1496px;
+    border: 2px solid black;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.end-button{
+    float: right;
+    display: block;
+    width: 280px;
+    height: 50px;
+    font-size: 28px;
+    font-weight: bold;
+    background-color: #3079ff;
+    color: #FFFFFF;
+    padding-top: 12px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.error-message2{
+    color: #f2463a;
+}
